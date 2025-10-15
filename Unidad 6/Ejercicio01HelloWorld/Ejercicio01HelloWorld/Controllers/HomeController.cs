@@ -18,6 +18,12 @@ namespace Ejercicio01HelloWorld.Controllers
             return View();
         }
 
+        public IActionResult Sergio(){
+            return View();
+        }
+
+
+
         public IActionResult Privacy()
         {
             return View();
