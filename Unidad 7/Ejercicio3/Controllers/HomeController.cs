@@ -1,11 +1,11 @@
-using Ejercicio2.Models;
-using Ejercicio2.Models.DAL.Data;
-using Ejercicio2.Models.Entities;
+using Ejercicio3.Models;
+using Ejercicio3.Models.DAL.Data;
+using Ejercicio3.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Ejercicio2.Controllers
+namespace Ejercicio3.Controllers
 {
 
     public class HomeController : Controller
@@ -32,16 +32,16 @@ namespace Ejercicio2.Controllers
 
         }
 
-        public IActionResult ListadoPersonas()
+        public IActionResult ListadoP3()
         {
-            List<Persona> personas = Listado.ObtenerListado();
+            Persona persona  = Listado.ObtenerPersona3();
 
             // Pasar la lista a la vista como modelo
-            return View(personas);
+            return View(persona);
 
 
         }
     }
 }
-           
+
 

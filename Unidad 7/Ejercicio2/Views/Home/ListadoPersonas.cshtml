@@ -1,0 +1,27 @@
+﻿@model List<Ejercicio2.Models.Entities.Persona>
+
+@{
+    ViewBag.Title = "Listado de Personas";
+}
+
+<h2>Listado de Personas</h2>
+
+<table border="1" cellpadding="5">
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellidos</th>  
+
+    </tr>
+
+    @foreach (var persona in Model)
+    {
+        <tr>
+            <td>@persona.Id</td>
+            <td>@persona.Nombre</td>
+            <td>@persona.Apellidos</td>
+        </tr>
+    }
+</table>
+
+@Html.ActionLink("← Volv inicio", "Index", "Home")
