@@ -1,4 +1,4 @@
-namespace Ejercicio1.Models
+namespace Ejercicio2.Models
 {
     public class ErrorViewModel
     {
