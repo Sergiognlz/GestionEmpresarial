@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Comprobar conexión a la base de datos</h2>
+
+<form method="post" asp-action="ComprobarConexion">
+    <button type="submit">Abrir conexión</button>
+</form>
+
+@if (ViewBag.EstadoConexion != null)
+{
+    <p>Estado de la conexión: <strong>@ViewBag.EstadoConexion</strong></p>
+}

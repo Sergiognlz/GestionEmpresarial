@@ -1,0 +1,50 @@
+﻿@model Ejercicio4.Models.Entities.Persona
+@using Ejercicio4.Models.DAL.Data
+
+@{
+    ViewBag.Title = "Editar Persona (Simulación)";
+    var departamentos = ListadoDepartamentos.ObtenerTodos();
+}
+
+<h2>Editar Persona (Simulación)</h2>
+
+<div>
+    <div>
+        <label for="Id">ID:</label>
+        <input type="text" id="Id" value="@Model.Id" readonly />
+    </div>
+
+    <div>
+        <label for="Nombre">Nombre:</label>
+        <input type="text" id="Nombre" value="@Model.Nombre" />
+    </div>
+
+    <div>
+        <label for="Apellidos">Apellidos:</label>
+        <input type="text" id="Apellidos" value="@Model.Apellidos" />
+    </div>
+
+    <div>
+        <label for="IdDepartamento">Departamento:</label>
+        <select id="IdDepartamento">
+            @* Generar opciones sin variables inline *@
+            @foreach (var dept in departamentos)
+            {
+                if (dept.IdDepartamento == Model.IdDepartamento)
+                {
+                    <option value="@dept.IdDepartamento" selected>@dept.NombreDepartamento</option>
+                }
+                else
+                {
+                    <option value="@dept.IdDepartamento">@dept.NombreDepartamento</option>
+                }
+            }
+        </select>
+    </div>
+
+    <br />
+
+    <button type="button" onclick="alert('cambios guardados');">Guardar Cambios</button>
+    <a href="#" style="margin-left:10px;"></a>
+</div>
+@Html.ActionLink("← Volv inicio", "Index", "Home")

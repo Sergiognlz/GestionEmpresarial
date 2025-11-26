@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Inicio";
+}
+
+<h2>@ViewBag.Saludo</h2>
+<p>Hoy es: @ViewBag.FechaLarga</p>
+
+
+@model Ejercicio4.Models.Entities.Persona
+
+<h2>Información de la persona</h2>
+
+<p>Id: @Model.Id</p>
+<p>Nombre: @Model.Nombre</p>
+
+@Html.ActionLink("Ir a listado de personas", "ListadoP3")
+@Html.ActionLink("Formulario", "ListadoAleatorio")

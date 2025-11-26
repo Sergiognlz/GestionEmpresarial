@@ -1,0 +1,27 @@
+﻿@model Ejercicio4.Models.Entities.Persona
+
+@{
+    ViewBag.Title = "Listado de Personas";
+}
+
+<h2>Listado de Personas f</h2>
+
+<table border="1" cellpadding="5">
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+
+    </tr>
+
+    @if (Model != null)
+    {
+        <tr>
+            <td>@Model.Id</td>
+            <td>@Model.Nombre</td>
+            <td>@Model.Apellidos</td>
+        </tr>
+    }
+</table>
+
+@Html.ActionLink("← Volv inicio", "Index", "Home")
