@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces.RepositoriesInterfaces
 {
-    internal interface Interface1
+    internal interface IPersonaRepository
     {
     }
 }

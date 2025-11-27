@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace UI.Controllers
 {
-    public class HomController1 : Controller
+    public class PersonaController : Controller
     {
         // GET: HomController1
         public ActionResult Index()
