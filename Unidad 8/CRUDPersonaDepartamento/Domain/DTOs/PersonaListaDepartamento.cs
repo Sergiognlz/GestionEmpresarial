@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using ListadoPersonasCRUD.Domain.Entities;
+using ListadoPersonasCRUD.Domain.RepositoriesInterfaces;
 
-namespace Domain.DTOs
+namespace ListadoPersonasCRUD.Domain.DTOs
 {
-    internal class PersonaListaDepartamento
+    public class PersonaListaDepartamento
     {
+        private readonly IDepartamentoRepository _departamentoRepository;
+        public Persona Persona { get; }
+        public List<Departamento> ListadoDepartamento { get; }
+
+        public PersonaListaDepartamento(Persona persona, IDepartamentoRepository departamentoRepository)
+        {
+            Persona = persona;
+            _departamentoRepository = departamentoRepository;
+            ListadoDepartamento = _departamentoRepository.GetListadoDepartamento();
+        }
     }
 }

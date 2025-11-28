@@ -1,83 +1,106 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ListadoPersonasCRUD.Domain.Entities;
+using ListadoPersonasCRUD.Domain.UseCasesInterfaces;
+using ListadoPersonasCRUD.UI.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace UI.Controllers
+
+namespace ListadoPersonasCRUD.UI.Controllers
 {
     public class PersonaController : Controller
     {
-        // GET: HomController1
-        public ActionResult Index()
+        private readonly IPersonaUseCase _personaUseCase;
+        private readonly IDepartamentoUseCase _departamentoUseCase;
+
+        public PersonaController(IPersonaUseCase personaUseCase, IDepartamentoUseCase departamentoUseCase)
         {
-            return View();
+            _personaUseCase = personaUseCase;
+            _departamentoUseCase = departamentoUseCase;
         }
 
-        // GET: HomController1/Details/5
-        public ActionResult Details(int id)
+        public IActionResult List()
         {
-            return View();
+            var listado = _personaUseCase.GetListadoPersonas();
+            return View(listado);
         }
 
-        // GET: HomController1/Create
-        public ActionResult Create()
+        public IActionResult Details(int id)
         {
-            return View();
+            var persona = _personaUseCase.GetPersonaById(id);
+            if (persona == null) return NotFound();
+            return View(persona);
         }
 
-        // POST: HomController1/Create
+        public IActionResult Create()
+        {
+            var vm = new PersonaSeleccionadaViewModel
+            {
+                Departamentos = _departamentoUseCase.GetListadoDepartamento()
+            };
+            return View(vm);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult Create(PersonaSeleccionadaViewModel model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                model.Departamentos = _departamentoUseCase.GetListadoDepartamento();
+                return View(model);
             }
-            catch
-            {
-                return View();
-            }
+
+            var persona = new Persona(0, model.Nombre, model.Apellido, model.FechaNacimiento, model.Direccion, model.Telefono, model.DepartamentoId);
+            _personaUseCase.CreatePersona(persona);
+            return RedirectToAction(nameof(List));
         }
 
-        // GET: HomController1/Edit/5
-        public ActionResult Edit(int id)
+        public IActionResult Edit(int id)
         {
-            return View();
+            var p = _personaUseCase.GetPersonaById(id);
+            if (p == null) return NotFound();
+
+            var vm = new PersonaSeleccionadaViewModel
+            {
+                Id = p.Id,
+                Nombre = p.Nombre,
+                Apellido = p.Apellido,
+                FechaNacimiento = p.FechaNacimiento,
+                Direccion = p.Direccion,
+                Telefono = p.Telefono,
+                DepartamentoId = p.DepartamentoId,
+                Departamentos = _departamentoUseCase.GetListadoDepartamento()
+            };
+            return View(vm);
         }
 
-        // POST: HomController1/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Edit(PersonaSeleccionadaViewModel model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                model.Departamentos = _departamentoUseCase.GetListadoDepartamento();
+                return View(model);
             }
-            catch
-            {
-                return View();
-            }
+
+            var persona = new Persona(model.Id, model.Nombre, model.Apellido, model.FechaNacimiento, model.Direccion, model.Telefono, model.DepartamentoId);
+            _personaUseCase.EditPersona(persona);
+            return RedirectToAction(nameof(List));
         }
 
-        // GET: HomController1/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id)
         {
-            return View();
+            var p = _personaUseCase.GetPersonaById(id);
+            if (p == null) return NotFound();
+            return View(p);
         }
 
-        // POST: HomController1/Delete/5
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult DeleteConfirmed(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _personaUseCase.DeletePersona(id);
+            return RedirectToAction(nameof(List));
         }
     }
 }

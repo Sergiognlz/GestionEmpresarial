@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{9A0A16FC-5919-444C-BD3F-B74EE59A0C62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompositionRoot", "CompositionRoot\CompositionRoot.csproj", "{C66F2DA9-9B0C-4CEE-BA05-019B108A94E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DI", "CompositionRoot\DI.csproj", "{C66F2DA9-9B0C-4CEE-BA05-019B108A94E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Domain.DTOs
+﻿namespace ListadoPersonasCRUD.Domain.DTOs
 {
-    internal class PersonaDeptDTO
+    public class PersonaDepDTO
     {
+        public int IdPersona { get; }
+        public int NDepartamento { get; }
+
+        public PersonaDepDTO(int idPersona, int nDepartamento)
+        {
+            IdPersona = idPersona;
+            NDepartamento = nDepartamento;
+        }
     }
 }

@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using ListadoPersonasCRUD.Domain.Entities;
 
-namespace Domain.Interfaces.UseCasesInterfaces
+namespace ListadoPersonasCRUD.Domain.UseCasesInterfaces
 {
-    internal interface IPersonaUseCase
+    public interface IPersonaUseCase
     {
+        List<Persona> GetListadoPersonas();
+        Persona? GetPersonaById(int id);
+        int DeletePersona(int id);
+        Persona CreatePersona(Persona persona);
+        Persona EditPersona(Persona personaEditada);
     }
 }

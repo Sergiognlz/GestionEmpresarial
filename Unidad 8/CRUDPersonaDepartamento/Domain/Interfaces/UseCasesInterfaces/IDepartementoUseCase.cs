@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using ListadoPersonasCRUD.Domain.Entities;
 
-namespace Domain.Interfaces.UseCasesInterfaces
+namespace ListadoPersonasCRUD.Domain.UseCasesInterfaces
 {
-    internal interface IDepartementoUseCase
+    public interface IDepartamentoUseCase
     {
+        List<Departamento> GetListadoDepartamento();
+        Departamento? GetDepartamentoById(int id);
+        int DeleteDepartamento(int id);
+        Departamento CreateDepartamento(Departamento departamento);
+        Departamento EditDepartamento(Departamento departamento);
     }
 }

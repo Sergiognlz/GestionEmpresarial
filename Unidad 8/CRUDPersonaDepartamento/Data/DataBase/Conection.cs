@@ -1,11 +1,19 @@
-﻿namespace Data.DataBase
+﻿using Microsoft.Extensions.Configuration;
+
+namespace ListadoPersonasCRUD.Data.DataBase
 {
     public class Conection
     {
-
-        public string GetConnection()
+        private readonly IConfiguration _configuration;
+        public Conection(IConfiguration configuration)
         {
-            return "Data Source=.;Initial Catalog=CRUDPersonaDepartamento;Integrated Security=True";
+            _configuration = configuration;
+        }
+
+        // Lee "DefaultConnection" de appsettings.json (configurable en Azure App Service/Key Vault)
+        public string GetConnectionString()
+        {
+            return _configuration.GetConnectionString("DefaultConnection");
         }
     }
 }

@@ -1,82 +1,84 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using ListadoPersonasCRUD.Domain.UseCasesInterfaces;
+using ListadoPersonasCRUD.Domain.Entities;
+using ListadoPersonasCRUD.UI.ViewModels;
+using System;
 
-namespace UI.Controllers
+namespace ListadoPersonasCRUD.UI.Controllers
 {
     public class DepartamentoController : Controller
     {
-        // GET: DepartamentoController
-        public ActionResult Index()
+        private readonly IDepartamentoUseCase _departamentoUseCase;
+
+        public DepartamentoController(IDepartamentoUseCase departamentoUseCase)
+        {
+            _departamentoUseCase = departamentoUseCase;
+        }
+
+        public IActionResult List()
+        {
+            var list = _departamentoUseCase.GetListadoDepartamento();
+            return View(list);
+        }
+
+        public IActionResult Details(int id)
+        {
+            var d = _departamentoUseCase.GetDepartamentoById(id);
+            if (d == null) return NotFound();
+            return View(d);
+        }
+
+        public IActionResult Create()
         {
             return View();
         }
 
-        // GET: DepartamentoController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: DepartamentoController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: DepartamentoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult Create(Departamento departamento)
+        {
+            if (!ModelState.IsValid) return View(departamento);
+            _departamentoUseCase.CreateDepartamento(departamento);
+            return RedirectToAction(nameof(List));
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var d = _departamentoUseCase.GetDepartamentoById(id);
+            if (d == null) return NotFound();
+            return View(d);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Departamento departamento)
+        {
+            if (!ModelState.IsValid) return View(departamento);
+            _departamentoUseCase.EditDepartamento(departamento);
+            return RedirectToAction(nameof(List));
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var d = _departamentoUseCase.GetDepartamentoById(id);
+            if (d == null) return NotFound();
+            return View(d);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                _departamentoUseCase.DeleteDepartamento(id);
+                return RedirectToAction(nameof(List));
             }
-            catch
+            catch (InvalidOperationException ex)
             {
-                return View();
-            }
-        }
-
-        // GET: DepartamentoController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: DepartamentoController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: DepartamentoController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: DepartamentoController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
+                // Mostrar error en vista
+                TempData["Error"] = ex.Message;
+                return RedirectToAction(nameof(Details), new { id });
             }
         }
     }
