@@ -1,0 +1,45 @@
+AdivinaDept/
+│
+├── DI/
+│		└── Container.cs/
+│
+├── Domain/
+│   └── Entities/
+│   │    ├── Persona.cs
+│   │    └── Departamento.cs
+│   ├── Interfaces/
+│   │   ├── Repositories/
+│   │   │		├──  IPersonaRepository.cs
+│   │   │		└── IDepartamentoRepository.cs
+│	│	 │
+│	│	 └── UseCases/
+│   │			 ├── IGetGameDatUseCase.c
+│	│			 └── ICheckDepartmentsUseCase.cs
+│   ├── UseCases/
+│   │   ├── GetGameDataUseCase.cs
+│   │   └── CheckDepartmentsUseCase.cs
+│   │
+│   └── DTOs/
+│       ├── PersonaGameDto.cs
+│       ├── GameDataDto.cs
+│       └── CheckResultDto.cs
+│
+├── Data/
+│   ├── DataBase/
+│   │   └── DbConnection.cs
+│   │
+│   └── Repositories/
+│       ├── PersonasRepository.cs
+│       └── DepartamentosRepository.cs
+│
+└── UI/
+    ├── Controllers/
+    │   └── HomeController.cs
+    │
+    ├── ViewModels/
+    │   ├── HomeViewModel.cs
+    │   └── PersonaSeleccionadaViewModel.cs
+    │
+    └── Views/
+        └── Home/
+            └── Index.cshtml

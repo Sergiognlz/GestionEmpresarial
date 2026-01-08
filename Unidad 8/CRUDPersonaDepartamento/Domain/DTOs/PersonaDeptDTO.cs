@@ -1,14 +1,16 @@
-﻿namespace ListadoPersonasCRUD.Domain.DTOs
+﻿using ListadoPersonasCRUD.Domain.Entities;
+
+namespace ListadoPersonasCRUD.Domain.DTOs
 {
     public class PersonaDepDTO
     {
-        public int IdPersona { get; }
-        public int NDepartamento { get; }
+        public Persona Persona { get; set; } // información completa de la persona
+        public string NombreDepartamento { get; set; } // nombre del departamento
 
-        public PersonaDepDTO(int idPersona, int nDepartamento)
+        public PersonaDepDTO(Persona persona, string nombreDepartamento)
         {
-            IdPersona = idPersona;
-            NDepartamento = nDepartamento;
+            Persona = persona;
+            NombreDepartamento = nombreDepartamento;
         }
     }
 }

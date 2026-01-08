@@ -1,13 +1,12 @@
+﻿var builder = WebApplication.CreateBuilder(args);
 
-var builder = WebApplication.CreateBuilder(args);
-
-// A�adir servicios MVC
+// MVC + API Controllers
 builder.Services.AddControllersWithViews();
 
-// Registrar servicios desde Container
+// DI
 ListadoPersonasCRUD.DI.Container.RegisterServices(builder.Services);
 
-// Registrar IConfiguration para Conection
+// Configuración
 builder.Services.AddSingleton(builder.Configuration);
 
 var app = builder.Build();
@@ -18,11 +17,15 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
 
-// Rutas MVC
+// 🔹 API Controllers
+app.MapControllers();
+
+// 🔹 MVC Controllers
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

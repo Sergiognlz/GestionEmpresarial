@@ -1,0 +1,72 @@
+﻿@model ListadoPersonasCRUD.UI.ViewModels.PersonaSeleccionadaViewModel
+
+@{
+    ViewData["Title"] = "Crear Persona";
+}
+
+<h1>Crear Persona</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Apellidos" class="control-label"></label>
+                <input asp-for="Apellidos" class="form-control" />
+                <span asp-validation-for="Apellidos" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FechaNacimiento" class="control-label"></label>
+                <input asp-for="FechaNacimiento" type="date" class="form-control"
+                       value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Direccion" class="control-label"></label>
+                <input asp-for="Direccion" class="form-control" />
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Telefono" class="control-label"></label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FotoFile" class="control-label"></label>
+                <input asp-for="FotoFile" type="file" class="form-control" />
+                <span asp-validation-for="FotoFile" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DepartamentoId" class="control-label">Departamento</label>
+                <select asp-for="DepartamentoId" class="form-control"
+                        asp-items="@(new SelectList(Model.Departamentos, "ID", "Nombre"))">
+                    <option value="">-- Seleccione --</option>
+                </select>
+                <span asp-validation-for="DepartamentoId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <button type="submit" class="btn btn-primary">Crear</button>
+                <a asp-action="Index" class="btn btn-secondary">Volver al Listado</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

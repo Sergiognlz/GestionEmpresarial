@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Opcional: elimina esta línea si no usas layout
+}
+
+<div style="text-align:center; padding:40px;">
+    <h1 style="color:#c62828;">Ha ocurrido un error</h1>
+    <p>Lo sentimos, algo no ha salido como esperábamos.</p>
+
+    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <p><strong>Detalles:</strong> @ViewBag.ErrorMessage</p>
+    }
+
+    <a href="@Url.Action("Index", "Home")"
+       style="display:inline-block; margin-top:20px; text-decoration:none; color:white; background:#1976d2; padding:10px 20px; border-radius:5px;">
+        Volver al inicio
+    </a>
+</div>

@@ -10,11 +10,11 @@ namespace ListadoPersonasCRUD.Domain.DTOs
         public Persona Persona { get; }
         public List<Departamento> ListadoDepartamento { get; }
 
-        public PersonaListaDepartamento(Persona persona, IDepartamentoRepository departamentoRepository)
+        public PersonaListaDepartamento(Persona persona, List<Departamento>listaDepartamentos)
         {
             Persona = persona;
-            _departamentoRepository = departamentoRepository;
-            ListadoDepartamento = _departamentoRepository.GetListadoDepartamento();
+
+            ListadoDepartamento = listaDepartamentos;
         }
     }
 }

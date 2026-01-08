@@ -1,0 +1,47 @@
+﻿@model UI.ViewModels.HomeViewModel
+
+<h2>Adivina los departamentos</h2>
+
+<form method="post">
+    <table class="table">
+        @for (int i = 0; i < Model.Personas.Count; i++)
+        {
+            var persona = Model.Personas[i];
+            var color = persona.ColorDepartamento ?? "white"; // Color de la fila según pista
+
+            <tr style="background-color:@color">
+                <td>@persona.NombreCompleto</td>
+                <td>
+                    <select asp-for="Personas[i].DepartamentoSeleccionado"
+                            asp-items="Model.Departamentos" class="form-select">
+                        <option value="">--Selecciona--</option>
+                    </select>
+                    <input type="hidden" asp-for="Personas[i].PersonaId" />
+                </td>
+            </tr>
+        }
+    </table>
+
+    <button type="submit" class="btn btn-primary">Comprobar</button>
+</form>
+
+@if (Model.Resultado != null)
+{
+    <div class="alert alert-info mt-3">
+        <p>Aciertos: @Model.Resultado.Aciertos / @Model.Resultado.Total</p>
+
+        @if (Model.Resultado.HasGanado)
+        {
+            <strong>¡Felicidades, has ganado! 🎉</strong>
+        }
+        else
+        {
+            <strong>Sigue intentando.</strong>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.Resultado.Mensaje))
+        {
+            <p>@Model.Resultado.Mensaje</p>
+        }
+    </div>
+}
