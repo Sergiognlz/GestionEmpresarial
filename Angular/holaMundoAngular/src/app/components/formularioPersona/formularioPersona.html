@@ -1,0 +1,16 @@
+<div class="form-container">
+  <h2>Formulario de Persona</h2>
+  <form (ngSubmit)="guardar()">
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" [(ngModel)]="nombre" name="nombre" required>
+    </div>
+
+    <div class="form-group">
+      <label for="apellidos">Apellidos:</label>
+      <input type="text" id="apellidos" [(ngModel)]="apellidos" name="apellidos" required>
+    </div>
+
+    <button type="submit">Guardar</button>
+  </form>
+</div>
