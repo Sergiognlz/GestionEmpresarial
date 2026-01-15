@@ -1,0 +1,23 @@
+.app-container {
+  min-height: 100vh;             /* ocupa toda la pantalla */
+  display: flex;
+  flex-direction: column;
+  align-items: center;           /* CENTRA HORIZONTALMENTE */
+  justify-content: flex-start;   /* empieza desde arriba */
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: #4CAF50;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* Espaciado entre componentes */
+app-tabla-personas,
+app-listado-personas,
+app-formulario-persona,
+app-boton {
+  margin-bottom: 30px;
+}
