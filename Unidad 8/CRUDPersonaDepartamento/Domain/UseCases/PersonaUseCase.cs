@@ -38,7 +38,7 @@ namespace ListadoPersonasCRUD.Domain.UseCases
             return _repositorioPersonas.CreatePersona(persona);
         }
 
-        public Persona EditPersona(Persona personaEditada)
+        public int EditPersona(Persona personaEditada)
         {
             return _repositorioPersonas.EditPersona(personaEditada);
         }

@@ -43,13 +43,13 @@ public class PersonasController : ControllerBase
     [HttpPut("{id:int}")]
     public IActionResult Update(int id, Persona persona)
     {
-        if (id != persona.ID) return BadRequest("El ID no coincide");
+        //if (id != persona.ID) return BadRequest("El ID no coincide");
 
         var existente = _repo.GetPersonaById(id);
         if (existente == null) return NotFound();
 
-        var editada = _repo.EditPersona(persona);
-        return NoContent();
+        int numFilas = _repo.EditPersona(persona);
+        return Ok(numFilas);
     }
 
     // DELETE: api/personas/5

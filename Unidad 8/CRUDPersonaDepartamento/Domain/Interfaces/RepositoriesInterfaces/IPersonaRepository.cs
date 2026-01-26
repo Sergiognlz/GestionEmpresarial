@@ -9,6 +9,6 @@ namespace ListadoPersonasCRUD.Domain.RepositoriesInterfaces
         Persona? GetPersonaById(int id);
         int DeletePersona(int id);
         Persona CreatePersona(Persona persona);
-        Persona EditPersona(Persona personaEditada);
+        int EditPersona(Persona personaEditada);
     }
 }

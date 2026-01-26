@@ -99,8 +99,9 @@ namespace ListadoPersonasCRUD.Data.Repositories
                                persona.Direccion, persona.Foto, persona.Telefono, persona.IDDepartamento);
         }
 
-        public Persona EditPersona(Persona personaEditada)
+        public int  EditPersona(Persona personaEditada)
         {
+            int numFilas;
             using var conn = new SqlConnection(_cs);
             using var cmd = new SqlCommand(@"
                 UPDATE Persona 
@@ -116,8 +117,9 @@ namespace ListadoPersonasCRUD.Data.Repositories
             cmd.Parameters.AddWithValue("@ID", personaEditada.ID);
 
             conn.Open();
-            cmd.ExecuteNonQuery();
-            return personaEditada;
+            
+            numFilas = cmd.ExecuteNonQuery();
+            return numFilas;
         }
     }
 }
